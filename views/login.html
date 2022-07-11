@@ -1,0 +1,73 @@
+<div class="container">
+    <div class="row d-flex justify-content-center">
+        <div class="col-6">
+            <div class="card p-5">
+                <div class="row">
+                    <div class="col-12 mb-3 d-flex justify-content-center align-items-center">
+                        <img src="assets/images/education.svg" class="img-fluid obj-fit w-75"/>
+                    </div>
+                    <div class="col-12">
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Correo</label>
+                            <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" [(ngModel)]="email">
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="mb-3">
+                            <label for="exampleInputPassword1" class="form-label">Contraseña</label>
+                            <input type="password" class="form-control" id="password" name="password" [(ngModel)]="password">
+                        </div>
+                    </div>
+                    <div class="col-12 d-flex flex-row-reverse">
+                        <button type="submit" class="btn btn-success btn-lg" (click)="login()">Entrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal w-100 vh-100 bg-white" tabindex="-1" role="dialog" style="text-align:center;margin-top:180px;" scroll="no" id="pleaseWait" data-backdrop="static" data-bs-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog" role="document">
+        <img src="assets/images/loading.gif" style="margin-top:50px;">
+    </div>
+</div>
+
+<div class="modal fade w-100" id="modalFailed" data-bs-backdrop="static" data-bs-keyboard="true" tabindex="-1" aria-labelledby="modalSuccessLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header border-bottom-none">
+          <button type="button" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body text-center d-flex justify-content-center flex-column">
+          <div class="row d-flex justify-content-center flex-column text-center">
+            <span class="icon-big-red text-danger"><i class="fa-solid fa-circle-xmark"></i></span>
+            <p class="title-6">{{mensaje}}</p>
+            <div class="col-12 d-flex justify-content-center">
+              <div class="col-12 col-md-6 col-lg-6">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade w-100" id="modalWarning" data-bs-backdrop="static" data-bs-keyboard="true" tabindex="-1" aria-labelledby="modalSuccessLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header border-bottom-none">
+          <button type="button" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body text-center d-flex justify-content-center flex-column">
+          <div class="row d-flex justify-content-center flex-column text-center">
+            <span class="icon-big-red text-warning"><i class="fa-solid fa-triangle-exclamation"></i></span>
+            <p class="title-6">{{mensaje}}</p>
+            <div class="col-12 d-flex justify-content-center">
+              <div class="col-12 col-md-6 col-lg-6">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

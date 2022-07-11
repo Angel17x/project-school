@@ -1,0 +1,22 @@
+{
+    "users": [
+        {
+            "name": "Angel",
+            "email": "angel26078613@gmail.com",
+            "password": "angel1234",
+            "path": "./assets/images/users"
+        },
+        {
+            "name": "Nazareth",
+            "email": "naza@gmail.com",
+            "password": "naza1234",
+            "path": "./assets/images/users"
+        },
+        {
+            "name": "Piton",
+            "email": "piton@gmail.com",
+            "password": "piton1234",
+            "path": "./assets/images/users"
+        }
+    ]
+}

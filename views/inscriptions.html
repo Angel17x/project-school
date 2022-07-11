@@ -1,0 +1,116 @@
+<navbar></navbar>
+<div class="container-fluid pt-2">
+    <div class="row d-flex justify-content-center mt-5">
+        <div class="col-12">
+            <div class="card p-5">
+                <div class="row">
+                    <div class="col-12">
+                        <h2 class="h2 text-success">Inscripción</h2>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Nombres - Niño/Niña</label>
+                            <input type="text" class="form-control" id="name" name="name" [(ngModel)]="name" maxlength="20">
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="mb-3">
+                            <label for="lastname" class="form-label">Apellidos - Niño/Niña</label>
+                            <input type="text" class="form-control" id="lastname" name="lastname" [(ngModel)]="lastname" maxlength="20">
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="mb-3">
+                            <label for="age" class="form-label">Edad</label>
+                            <input type="number" class="form-control" id="age" name="age" [(ngModel)]="age" maxlength="3">
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="mb-3">
+                            <label for="rep_name" class="form-label">Nombres - reprensentante</label>
+                            <input type="text" class="form-control" id="rep_name" name="rep_name" [(ngModel)]="rep_name" maxlength="20">
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="mb-3">
+                            <label for="rep_lastname" class="form-label">Apellidos - reprensentante</label>
+                            <input type="text" class="form-control" id="rep_lastname" name="rep_lastname" [(ngModel)]="rep_lastname" maxlength="20">
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="mb-3">
+                            <label for="rep_age" class="form-label">Edad - reprensentante</label>
+                            <input type="number" class="form-control" id="rep_age" name="rep_age" [(ngModel)]="rep_age" maxlength="3">
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="mb-3">
+                            <label for="address" class="form-label">Dirección - reprensentante</label>
+                            <input type="text" class="form-control" id="address" name="address" [(ngModel)]="address" maxlength="50">
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="mb-3">
+                            <label for="address_2" class="form-label">Dirección 2 - reprensentante</label>
+                            <input type="text" class="form-control" id="address_2" name="address_2" [(ngModel)]="address_2" maxlength="50">
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="mb-3">
+                            <label for="address_3" class="form-label">Dirección 3 - reprensentante</label>
+                            <input type="text" class="form-control" id="address_3" name="address_3" [(ngModel)]="address_3" maxlength="50">
+                        </div>
+                    </div>
+                    <div class="col-12 d-flex flex-row-reverse">
+                        <button type="submit" class="btn btn-success btn-lg m-2" (click)="register()">Registrar</button>
+                        <button type="button" class="btn btn-secondary btn-lg m-2" (click)="clean()">Limpiar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal w-100 vh-100 bg-white" tabindex="-1" role="dialog" style="text-align:center;margin-top:180px;" scroll="no" id="pleaseWait" data-backdrop="static" data-bs-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog" role="document">
+        <img src="assets/images/loading.gif" style="margin-top:50px;">
+    </div>
+</div>
+
+<div class="modal fade w-100" id="modalFailed" data-bs-backdrop="static" data-bs-keyboard="true" tabindex="-1" aria-labelledby="modalSuccessLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header border-bottom-none">
+          <button type="button" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body text-center d-flex justify-content-center flex-column">
+          <div class="row d-flex justify-content-center flex-column text-center">
+            <span class="icon-big-red text-warning"><i class="fa-solid fa-triangle-exclamation"></i></span>
+            <p class="title-6">{{mensaje}}</p>
+            <div class="col-12 d-flex justify-content-center">
+              <div class="col-12 col-md-6 col-lg-6">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade w-100" id="modalSuccess" data-bs-backdrop="static" data-bs-keyboard="true" tabindex="-1" aria-labelledby="modalSuccessLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header border-bottom-none">
+          <button type="button" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body text-center d-flex justify-content-center flex-column">
+          <div class="row d-flex justify-content-center flex-column text-center">
+            <span class="icon-big-red text-success"><i class="fas fa-check-circle"></i></span>
+            <p class="title-6">{{mensaje}}</p>
+            <div class="col-12 d-flex justify-content-center">
+              <div class="col-12 col-md-6 col-lg-6">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
