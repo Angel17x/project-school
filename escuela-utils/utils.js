@@ -113,6 +113,15 @@ function amountFormattingObject(amount) {
   retorno.decimalPart = parteDecimal;
   return retorno;
 }
+function translate(value){
+  value = value.toLowerCase()
+  const obj = { 
+    "web_developer": "Desarrollador web",
+    "architect" : "Arquitecto",
+    "security" : "Seguridad"
+  }
+  return obj[value] || null;
+}
 function validarEmail(valor) {
   if (valor.indexOf('&') >= 0) {
     return false;

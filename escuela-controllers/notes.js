@@ -15,7 +15,7 @@
         });
         app.NotesComponent.prototype.ngOnInit=function(){
             this.email = null;
-            this.password;
+            this.password=null;
             this.getStorage(this.service.getStorage('user'));
         }
         
@@ -38,19 +38,18 @@
                 $("#pleaseWait").modal("hide");
             })
         }
-        
         app.NotesComponent.prototype.verifyUser = function(data){
             if(!(data == null || data == undefined || data == "")){
-                if(data.hasOwnProperty('users')){
-                    if(data.users.length!=0){
-                        let user = data.users.find(x => x.email === this.email ? x : undefined);
-                        if(user.password === this.password){
-                            return
-                        }else{
-                            this.service.clearStorage();
-                            this.router.navigate(['/login']);
-                        }
+                if(data.hasOwnProperty('email')){
+                    if(data.email !== this.email){
+                        this.service.clearStorage();
+                        this.router.navigate(['/login']);
                     }
+                    if(data.password !== this.password){
+                        this.service.clearStorage();
+                        this.router.navigate(['/login']);
+                    }
+                    return
                 }
             }
         }
@@ -64,7 +63,7 @@
 
             this.email = user?.email;
             this.password = user?.password;
-
+            this.name = user?.name;
             if(!(user==null || user == undefined || user == "")){
                 this.callServicesUser(user);
             }else{

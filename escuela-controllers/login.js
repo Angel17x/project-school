@@ -21,13 +21,11 @@
         }
         app.LoginComponent.prototype.login=function(){
             if(this.email==null || this.email==undefined){
-                this.mensaje = "Ingrese el correo";
-                $("modalWarning").modal("show");
+                this.message("Ingrese el correo", "warning")
                 return;
             }
             if(this.password==null || this.password==undefined){
-                this.mensaje = "Ingrese la contraseña";
-                $("modalWarning").modal("show");
+                this.message("Ingrese la contraseña", "warning")
                 return;
             }
             this.callServices();
@@ -35,38 +33,44 @@
         app.LoginComponent.prototype.callServices=function(){
             let request = null;
             $("#pleaseWait").modal("show");
+            let mensajeAll = "Error al procesar la petición";
             request = this.service.callServicesHttp('login', null, {email: this.email, password: this.password});
             request.subscribe(data => {
                 if(data == null || data == undefined || data == ""){
-                    this.mensaje = "Error al obtener el usuario";
-                    $("#modalFailed").modal("show");
+                    this.message("Usuario o contraseña invalido", "error");
                     return;
                 }
                 if(data.status_http==200){
 					delete data['status_http'];
                     this.verifyUser(data)        
                 }
-                $("#pleaseWait").modal("hide");
             },err => {
                 $("#pleaseWait").modal("hide");
+                this.message(this.service.processError(err,mensajeAll), "error");
             })
         }
         
         app.LoginComponent.prototype.verifyUser = function(data){
             if(!(data == null || data == undefined || data == "")){
-                if(data.hasOwnProperty('users')){
-                    if(data.users.length!=0){
-                        let user = data.users.find(x => x.email === this.email ? x : undefined);
-                        if(user.password === this.password){
-                            this.service.setStorage('user', user);
-                            this.router.navigate(['/init']);
-                        }else{
-                            this.mensaje = "Usuario o contraseña invalido";
-                            $("#modalFailed").modal("show");
-
-                        }
+                if(data.hasOwnProperty('email')){
+                    if(data.email !== this.email){
+                        this.message("Usuario o contraseña invalido", "error");
+                        return;
                     }
+                    if(data.hasOwnProperty('password')){
+                        if(data.password === this.password){
+                            $("#pleaseWait").modal("hide");
+                            this.service.setStorage('user', data);
+                            return this.router.navigate(['/init']);
+                        }
+                        this.message("Usuario o contraseña invalido", "error");
+                        return;
+                    }
+                    this.message("Usuario o contraseña invalido", "error");
+                    return;
                 }
+                this.message("Usuario o contraseña invalido", "error");
+                return;
             }
         }
         app.LoginComponent.prototype.getStorage=function(data){
@@ -84,6 +88,24 @@
             }else{
                 this.service.clearStorage();
                 this.router.navigate(['/login']);
+                return;
+            }
+        }
+        app.LoginComponent.prototype.message=function(message, name){
+            this.mensaje = message;
+            if(!message){
+                return;
+            }
+            if(name === "error"){
+                $("#modalFailed").modal("show");
+                return;
+            }
+            if(name === "success"){
+                $("#modalSuccess").modal("show");
+                return;
+            }
+            if(name === "warning"){
+                $("#modalWarning").modal("show");
                 return;
             }
         }

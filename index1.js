@@ -1,4 +1,4 @@
-var domain="localhost:80";
+var domain="localhost:5500";
 var base="http://"+domain+"/";
 function getDomain(){
 	return domain;
@@ -7,11 +7,8 @@ function doLogout(){
 	localStorage.clear();
 	sessionStorage.clear();
 }
-function getRealm(){
-	return "cuyawa";
-}
 function getApi(){
-	return "http://localhost:80/";
+	return "http://localhost:5500/api/";
 }
 function getEnlace(){
 	return "deegle_auth";

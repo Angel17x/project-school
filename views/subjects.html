@@ -1,4 +1,4 @@
-<navbar></navbar>
+<navbar [name]="name"></navbar>
 <div class="container-fluid">
     <div class="row">
         <table class="table">
@@ -36,4 +36,10 @@
             </tbody>
           </table>
     </div>
+</div>
+
+<div class="modal w-100 vh-100 bg-white" tabindex="-1" role="dialog" style="text-align:center;margin-top:180px;" scroll="no" id="pleaseWait" data-backdrop="static" data-bs-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog" role="document">
+      <img src="assets/images/loading.gif" style="margin-top:50px;">
+  </div>
 </div>

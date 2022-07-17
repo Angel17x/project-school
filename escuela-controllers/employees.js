@@ -1,8 +1,8 @@
 (function(app) {
-	app.InitComponent =
+	app.EmployeesComponent =
 		ng.core.Component({
-		  selector: 'init',
-		  templateUrl: 'views/init.html'
+		  selector: 'employees',
+		  templateUrl: 'views/employees.html'
 		})
 		.Class({
             constructor: [ng.router.ActivatedRoute,ng.router.Router,app.AppCallService,
@@ -13,14 +13,71 @@
                 }
             ]
         });
-        app.InitComponent.prototype.ngOnInit=function(){
+        app.EmployeesComponent.prototype.ngOnInit=function(){
             this.email = null;
             this.password=null;
             this.name=null;
+            this.type = null;
+            this.listRegister = [];
+            this.value=false;
+            this.employeeSelected = {};
             this.getStorage(this.service.getStorage('user'));
+            this.getEmployees();
         }
-        
-        app.InitComponent.prototype.callServicesUser=function(user){
+        app.EmployeesComponent.prototype.getEmployees = function(){
+            let request = null;
+            $("#pleaseWait").modal("show");
+
+            request = this.service.callServicesHttp('employees', null, null);
+            request.subscribe(data => {
+                if(data == null || data == undefined || data == ""){
+                    this.service.clearStorage();
+                    this.router.navigate(['/login']);
+                    return;
+                }
+                if(data.status_http==200){
+					delete data['status_http'];
+                    this.listRegister = data?.employees.map(x => this.formattedData(x));      
+                }
+                $("#pleaseWait").modal("hide");
+            },err => {
+                $("#pleaseWait").modal("hide");
+            })
+        }
+        app.EmployeesComponent.prototype.formattedData = function(data){
+            
+            let user = JSON.parse(this.service.getStorage('user'));
+            if(user.hasOwnProperty("actions")){
+                if(user.actions.length!=0){
+                    data.actions = user.actions.flatMap(x => x.value === "CREATE" ? [] : x);
+                }
+            }
+            return data;
+        }
+        app.EmployeesComponent.prototype.selectAction=function(data, action){
+            this.employeeSelected = data;
+
+            const { value } = action
+            if(value === "UPDATE"){
+                this.router.navigate(["/update-employee"], {queryParams: this.formattedDataSend(data)});
+            }
+            if(value === "DELETE"){
+                $("#modalDelete").modal("show");
+            }
+        }
+        app.EmployeesComponent.prototype.formattedDataSend=function(data){
+            let obj = {
+                id: data?.id,
+                name: data?.name,
+                age: data?.age,
+                work_area: data?.work_area
+            };
+            return obj;
+        }
+        app.EmployeesComponent.prototype.translate2=function(value){
+            return translate(value);
+        }
+        app.EmployeesComponent.prototype.callServicesUser=function(user){
             let request = null;
             $("#pleaseWait").modal("show");
             request = this.service.callServicesHttp('login', null, user);
@@ -39,7 +96,7 @@
                 $("#pleaseWait").modal("hide");
             })
         }
-        app.InitComponent.prototype.verifyUser = function(data){
+        app.EmployeesComponent.prototype.verifyUser = function(data){
             if(!(data == null || data == undefined || data == "")){
                 if(data.hasOwnProperty('email')){
                     if(data.email !== this.email){
@@ -54,7 +111,7 @@
                 }
             }
         }
-        app.InitComponent.prototype.getStorage=function(data){
+        app.EmployeesComponent.prototype.getStorage=function(data){
             if(data==null || data==undefined){
                 this.service.clearStorage();
                 this.router.navigate(['/login']);
@@ -65,7 +122,8 @@
             this.email = user?.email;
             this.password = user?.password;
             this.name = user?.name;
-            
+            this.type = user?.type;
+
             if(!(user==null || user == undefined || user == "")){
                 this.callServicesUser(user);
             }else{
@@ -75,10 +133,10 @@
             }
         }
         
-        app.InitComponent.prototype.ngOnDestroy=function(){
+        app.EmployeesComponent.prototype.ngOnDestroy=function(){
             
         }
-        app.InitComponent.prototype.message=function(message, name){
+        app.EmployeesComponent.prototype.message=function(message, name){
             this.mensaje = message;
             if(!message){
                 return;

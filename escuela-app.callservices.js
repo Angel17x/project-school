@@ -165,9 +165,25 @@
 		let request=null;
 		switch(ser){
 			case 'login':{
-				request=this.callServices('project-naza/db.json',"GET",param,null,false,"JSON",null,true,null);
+				request=this.callServices('login',"POST",param,null,false,"JSON",null,true,null);
 				return request;
 			}break;
+			case 'employees':{
+				request=this.callServices('employees',"GET",null,null,false,"JSON",null,true,null);
+				return request;
+			}
+			case 'create-employee':{
+				request=this.callServices('employee',"POST",param,null,false,"JSON",null,true,null);
+				return request;
+			}
+			case 'update-employee':{
+				request=this.callServices('employee'+querys,"PUT",param,null,false,"JSON",null,true,null);
+				return request;
+			}
+			case 'schedule':{
+				request=this.callServices('schedule',"GET",param,null,false,"JSON",null,true,null);
+				return request;
+			}
 		}
     }
 	app.AppCallService.prototype.setStorage=function(name, value){
@@ -182,4 +198,14 @@
 		localStorage.clear();
 		return;
 	}
+	app.AppCallService.prototype.processError=function(err, msg){
+		if(err.hasOwnProperty("status")){
+			if(err.status === 0){
+				return "Error en comunicación con el servidor, tiempo de espera agotado!";
+			}else{
+				return msg;
+			}
+		}
+	}
+	
 })(window.app || (window.app = {}));

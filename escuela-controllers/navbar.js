@@ -3,6 +3,7 @@
 		ng.core.Component({
 		selector: 'navbar',
 		templateUrl: 'views/navbar.html',
+		inputs:["name"],
 		})
 		.Class({
 			constructor: [ng.router.Router,ng.router.ActivatedRoute,app.AppCallService,
@@ -24,7 +25,7 @@
 				if(toggle && nav && bodypd && headerpd){
 				toggle.addEventListener('click', ()=>{
 				// show navbar
-				nav.classList.toggle('show')
+				nav.classList.toggle('show2')
 				// change icon
 				toggle.classList.toggle('bx-x')
 				// add padding to body

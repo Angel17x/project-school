@@ -1,0 +1,40 @@
+<navbar [name]="name"></navbar>
+<div class="container-fluid mt-5">
+    <div class="row">
+      <div *ngIf="type==='administrator'" class="col-12 d-flex justify-content-end">
+        <button [routerLink]="['/create-employee']" routerLinkActive="router-link-active"  class="btn btn-lg btn-success mt-2">
+          <span class="text-white me-2"><i class="fa-solid fa-plus"></i></span>Crear empleado
+        </button>
+      </div>
+        <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Edad</th>
+                <th scope="col">Área</th>
+                <th *ngIf="type==='administrator'" scope="col"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of listRegister">
+                <th scope="row">{{item?.id}}</th>
+                <td>{{item?.name}}</td>
+                <td>{{item?.age}}</td>
+                <td>{{translate2(item?.work_area)}}</td>
+                <td class="d-flex flex-row" *ngIf="type==='administrator'">
+                    <div *ngFor="let item2 of item.actions">
+                        <button (click)="selectAction(item, item2)" *ngIf="item2.value === 'UPDATE'" class="btn btn-primary m-2"><i class="fa-solid fa-pencil"></i></button>
+                        <button (click)="selectAction(item, item2)" *ngIf="item2.value === 'DELETE'" class="btn btn-danger m-2"><i class="fa-solid fa-trash"></i></button>
+                    </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+    </div>
+</div>
+<div class="modal w-100 vh-100 bg-white" tabindex="-1" role="dialog" style="text-align:center;margin-top:180px;" scroll="no" id="pleaseWait" data-backdrop="static" data-bs-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog" role="document">
+        <img src="assets/images/loading.gif" style="margin-top:50px;">
+    </div>
+</div>

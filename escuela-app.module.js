@@ -9,21 +9,23 @@
 			app.routing	
 		],
 		declarations: [
+			app.MsgComponent,
 			app.LoadingServiceComponent,
-			
 			app.NavbarComponent,
 			app.InitComponent,
 			app.SubjectsComponent,
 			app.NotesComponent,
 			app.StudentsComponent,
 			app.InscriptionsComponent,
+			app.EmployeesComponent,
+			app.CreateEmployeesComponent,
 			app.LoginComponent,
 			app.NotfoundComponent,
 			app.AppComponent
 		],
 		providers: [
+			app.MsgComponent,
 			app.AppCallService,
-			
 			app.LoadingServiceComponent
 		],
 		bootstrap: [app.AppComponent]

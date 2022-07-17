@@ -2,7 +2,8 @@
     <div class="row d-flex justify-content-center">
         <div class="col-6">
             <div class="card p-5">
-                <div class="row">
+                <form>
+                  <div class="row">
                     <div class="col-12 mb-3 d-flex justify-content-center align-items-center">
                         <img src="assets/images/education.svg" class="img-fluid obj-fit w-75"/>
                     </div>
@@ -22,13 +23,14 @@
                         <button type="submit" class="btn btn-success btn-lg" (click)="login()">Entrar</button>
                     </div>
                 </div>
+                </form>
             </div>
         </div>
     </div>
 </div>
 
-<div class="modal w-100 vh-100 bg-white" tabindex="-1" role="dialog" style="text-align:center;margin-top:180px;" scroll="no" id="pleaseWait" data-backdrop="static" data-bs-backdrop="static" data-keyboard="false">
-    <div class="modal-dialog" role="document">
+<div class="modal w-100 vh-100 bg-white" tabindex="-1" role="dialog" style="text-align:center;" scroll="no" id="pleaseWait" data-backdrop="static" data-bs-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog" style="margin-top:45%;" role="document">
         <img src="assets/images/loading.gif" style="margin-top:50px;">
     </div>
 </div>

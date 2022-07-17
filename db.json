@@ -1,13 +1,13 @@
 {
     "users": [
         {
-            "name": "Angel",
+            "name": "Angel Lugo",
             "email": "angel26078613@gmail.com",
-            "password": "angel1234",
+            "password": "Aelohack23.",
             "path": "./assets/images/users"
         },
         {
-            "name": "Nazareth",
+            "name": "Nazareth Avila",
             "email": "naza@gmail.com",
             "password": "naza1234",
             "path": "./assets/images/users"
